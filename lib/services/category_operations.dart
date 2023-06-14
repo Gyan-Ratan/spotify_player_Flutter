@@ -12,6 +12,8 @@ class CategoryOperations {
           'https://is4-ssl.mzstatic.com/image/thumb/Purple49/v4/70/f4/10/70f410a6-f7da-38d5-ee43-95dfd2965608/source/256x256bb.jpg'),
       Category('POP HITS',
           'https://is2-ssl.mzstatic.com/image/thumb/Purple123/v4/da/36/e8/da36e892-c2b6-d84a-66e1-fdb195d57f30/source/256x256bb.jpg'),
+      // Category('POP HITS',
+      //     'https://is2-ssl.mzstatic.com/image/thumb/Purple123/v4/da/36/e8/da36e892-c2b6-d84a-66e1-fdb195d57f30/source/256x256bb.jpg'),
     ];
   }
 }
