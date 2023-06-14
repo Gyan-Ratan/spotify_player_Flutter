@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:spotify_player/models/music.dart';
 import 'package:spotify_player/screens/search.dart';
@@ -15,13 +16,23 @@ class MyAoo extends StatefulWidget {
 class _MyAooState extends State<MyAoo> {
   var Tabs = [];
   int currentTabIndex = 0;
+  bool isPlaying = false;
   Music? music;
-  Widget miniPlayer(Music? music) {
+
+  //Connecting the audio player with the dependency of the player with the miniplayer
+  AudioPlayer _audioPlayer = new AudioPlayer();
+  Widget miniPlayer(Music? music, {bool stop = false}) {
+    // here bool is an optionl argument which will stop the previous playing song and play a new song
     this.music = music;
-    setState(() {});
+
     if (music == null) {
       return SizedBox();
     }
+    if (stop) {
+      _audioPlayer.stop();
+      isPlaying = false;
+    }
+    setState(() {});
     Size deviceSize = MediaQuery.of(context).size;
     return AnimatedContainer(
       duration: const Duration(milliseconds: 5000),
@@ -40,11 +51,17 @@ class _MyAooState extends State<MyAoo> {
             style: const TextStyle(color: Colors.white),
           ),
           IconButton(
-            onPressed: () {
-              print("PLAYYYYYY");
+            onPressed: () async {
+              isPlaying = !isPlaying;
+              if (isPlaying) {
+                await _audioPlayer.play(UrlSource(music.audioURL));
+              } else {
+                await _audioPlayer.pause();
+              }
+              setState(() {});
             },
             color: Colors.white,
-            icon: const Icon(Icons.play_arrow),
+            icon: isPlaying ? Icon(Icons.pause) : Icon(Icons.play_arrow),
           )
         ],
       ),
